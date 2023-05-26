@@ -1,1 +1,61 @@
+.main-section-banner
+{
+    background-image: url("https://i.ibb.co/JnmTD12/banner.jpg");
+    background-size: cover;
+}
+.white-accessibility-bg-gray {
+    color: #FFFFFF;
+ }
+ .white-accessibility {
+    color: #f8f2f2;
+ }
+.yellow-accessibility {
+    color:#634F12;
+ }
+ .product-name-color
+ {
+    color:#005685;
+ }
+.product-make-color
+{
+   color:#083519;
+}
+.product-rating-color
+{
+    color:#5F4F02;
+}
+.pure-white-accessibility {
+    color: #FFFFFF;
+ }
+ .bg-yellow-color-accessibility
+ {
+    background-color:#634F12 ;
+ }
+ .nav-bar-cart-bg-yellow-color-accessibility
+ {
+   background-color:#F8CA3F; 
+ }
+ .cart-gray-accessibility
+ {
+    color:#715050;
+ }
+ .cart-silver-accessibility
+ {
+   color:#525454;
+ }
+ .cart-hover-silver-accessibility
+ {
+   color:#7c7e7e;
+ }
+ .cart-total-button-accessibility
+ {
+/*background-color:#684F03 ;*/
+background-color: #FFA500;
+border:1px solid black;
+ }
+ .main {
+   height: 865px; 
+ }
+
+
 

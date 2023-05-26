@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon 2.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jdenticon@3.2.0/dist/jdenticon.min.js" async
+        integrity="sha384-yBhgDqxM50qJV5JPdayci8wCfooqvhFYbIKhv0hTtLvfeeyJMJCscRfFNKIxt43M"
+        crossorigin="anonymous">
+    </script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>    
+<link rel="stylesheet" href="./css/style.css"/>   
+<script src="./js/firebase.js"></script>
+<script src="./js/cart.js"></script>  
+<script src="./js/header.js"></script> 
+<script src="./js/numeral.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="bg-white w-full">
+        <div class="header h-16 bg-gray-900 flex items-center">
+            <!-- Left Icons-->
+            <div tabindex ="0" class="logo w-1/5 h-16 ml-10 pt-2">
+                   <img class="hover:scale-125 w-28 h-16 object-contain" aria-label="Amazon.ca" src="https://www.pinclipart.com/picdir/big/57-576184_view-our-amazon-storefront-amazon-logo-white-png.png">
+           </div>
+           <input aria-label="search" id="search" type="text" class="h-9 w-30 bg-gray-800 border border-gray-500 border-opacity-75 rounded-l-xl px-3 placeholder-white focus:outline-none"  placeholder="search...">
+           <div class="categories h-9 w-30 bg-gray-800 border border-gray-500 border-opacity-75 px-3 text-white items-center flex">
+            categories
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>             
+           </div>
+           <div tabindex ="0" class="search-icon bg-yellow-color-accessibility h-9 w-10 rounded-r-xl flex items-center justify-center">            
+            <svg class="h-6 w-6 pure-white-accessibility"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <title>search icon</title>
+                <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
+              </svg>              
+           </div>
+
+           <!-- Right Icons-->
+           <div class="icons text-white flex items-center ml-auto mr-8 w-48 h-16 justify-around">
+            <div tabindex ="0">
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <title>heart icon</title>  
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+              </svg>
+              </div> 
+              <div tabindex ="0" class="cart-icon relative nav-bar-cart-bg-yellow-color-accessibility h-9 w-10 rounded-xl flex items-center justify-center">
+                <svg class="h-6 w-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <title>cart icon</title>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+              </svg>
+              <div class="cart-item-number absolute -top-1 w-4 h-4 text-xs -right-1 text-gray-800 bg-white rounded-full flex justify-center items-center font-bold">
+              </div>              
+            </div>
+            <div tabindex ="0">  
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+              <title>bell icon</title>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+            </svg>
+            </div> 
+            <svg class="h-12 w-12" data-jdenticon-value="Smu">
+            <title></title>
+            </svg>            
+           </div>
+        </div>
+        <div class="main h-max flex">
+          <div class="hidden md:block main-sidebar border-t-2 border-gray-700 bg-gray-900 w-1/5 p-6">
+            <div class="sidebar-categories">
+              <div tabindex ="0" class="sidebar-main-category white-accessibility flex cursor-pointer mb-4 p-2 bg-gray-700 rounded-lg">
+                <span class="w-8">
+                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M.99 5.24A2.25 2.25 0 013.25 3h13.5A2.25 2.25 0 0119 5.25l.01 9.5A2.25 2.25 0 0116.76 17H3.26A2.267 2.267 0 011 14.74l-.01-9.5zm8.26 9.52v-.625a.75.75 0 00-.75-.75H3.25a.75.75 0 00-.75.75v.615c0 .414.336.75.75.75h5.373a.75.75 0 00.627-.74zm1.5 0a.75.75 0 00.627.74h5.373a.75.75 0 00.75-.75v-.615a.75.75 0 00-.75-.75H11.5a.75.75 0 00-.75.75v.625zm6.75-3.63v-.625a.75.75 0 00-.75-.75H11.5a.75.75 0 00-.75.75v.625c0 .414.336.75.75.75h5.25a.75.75 0 00.75-.75zm-8.25 0v-.625a.75.75 0 00-.75-.75H3.25a.75.75 0 00-.75.75v.625c0 .414.336.75.75.75H8.5a.75.75 0 00.75-.75zM17.5 7.5v-.625a.75.75 0 00-.75-.75H11.5a.75.75 0 00-.75.75V7.5c0 .414.336.75.75.75h5.25a.75.75 0 00.75-.75zm-8.25 0v-.625a.75.75 0 00-.75-.75H3.25a.75.75 0 00-.75.75V7.5c0 .414.336.75.75.75H8.5a.75.75 0 00.75-.75z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              <span class="white-accessibility-bg-gray">Categories</span>
+            </div>
+            <div tabindex ="0" class="sidebar-main-category flex p-2">
+              <span class="w-8"></span>
+              <span class="white-accessibility">Echo and Alexa</span>
+            </div> 
+            <div tabindex ="0" class="sidebar-main-category flex p-2">
+              <span class="w-8"></span>
+              <span class="white-accessibility">Kindle</span>
+            </div> 
+            <div tabindex ="0" class="sidebar-main-category flex p-2">
+              <span class="w-8"></span>
+              <span class="white-accessibility">Books</span>
+            </div>
+            <div tabindex ="0" class="sidebar-main-category flex p-2">
+              <span class="w-8"></span>
+              <span class="white-accessibility ">Electronics</span>
+            </div> 
+            <div tabindex ="0" class="sidebar-main-category flex p-2">
+              <span class="w-8"></span>
+              <span class="white-accessibility">Home and Garden</span>
+            </div>        
+            <div tabindex ="0" class="sidebar-main-category flex p-2">
+              <span class="w-8"></span>
+              <span class="white-accessibility">Fashion</span>
+            </div>        
+            <div tabindex ="0" class="sidebar-main-category text-white flex p-2 hover:bg-gray-700 rounded-lg">
+              <span class="w-8"><i class="fa-thin fa-percent"></i></span>
+              <span>Sell on Amazon</span>
+            </div>   
+            <div tabindex ="0" class="sidebar-main-category text-white flex p-2 hover:bg-gray-700 rounded-lg">
+              <span class="w-8"><i class="fa-sharp fa-regular fa-circle-question"></i></span>
+              <span>Help</span>
+            </div>                                                                                     
+            </div>
+          </div>
+          <div class="main-section flex-1 p-6 bg-white-100">
+            <div tabindex="0" class="font-bold text-4xl cart-gray-accessibility">
+                Shopping cart
+            </div>
+            <div tabindex="0" class="flex grid grid-cols-5 mt-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                <h2 class="flex-grow cart-gray-accessibility"><strong>Product</strong></h2>
+                <h2 class="w-48 cart-gray-accessibility"><strong>Product Details</strong></h2>
+                <h2 class="w-48 cart-gray-accessibility"><strong>Count</strong></h2>
+                <h2 class="cart-gray-accessibility"><strong>Total Cost</strong></h2>
+            </div>
+            <div tabindex="0" class="list_cart_items">
+            </div>
+            <div class="shopping-cart-item-total flex justify-end">
+              <div class="total-cost">
+               <h2>Total Cost</h2>
+               <div tabindex ="0" class="total-price text-3xl"><strong></strong></div>
+               </div> 
+              <div tabindex ="0" class="ml-5 complete-order-button white-accessibility flex items-center justify-center w-56 rounded cart-total-button-accessibility cursor-pointer hover:bg-yellow-600">
+               <strong>Complete Order</strong>
+              </div>
+             </div>             
+            </div>          
+          </div>    
+</div>
+</body>
+</html> 
